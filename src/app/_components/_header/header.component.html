@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+    <span>
+        <a routerLink = '/' >Welcome to Notes</a>
+    </span>
+    <span class="spacer"></span>
+    <ul>
+        <li *ngIf="userIsAuthenticated">
+            Hi, {{name}}
+        </li>&nbsp;&nbsp;
+        <li *ngIf="!userIsAuthenticated">
+            <a mat-button routerLinkActive="mat-accent" routerLink="/login">Login</a>
+        </li>
+        <li *ngIf="!userIsAuthenticated">
+            <a mat-button routerLinkActive="mat-accent" routerLink="/register">Signup</a>
+        </li>
+        <li *ngIf="userIsAuthenticated">
+            <button mat-raised-button color="warn" (click)="onLogout()">Logout</button>
+        </li>
+    </ul>
+</mat-toolbar>

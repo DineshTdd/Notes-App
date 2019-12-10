@@ -1,0 +1,35 @@
+mat-spinner {
+    margin: auto;
+}
+
+mat-card {
+    width: 50%;
+    margin: 1rem auto;
+    padding: auto;
+}
+
+mat-card-title {
+    float: left;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+i {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+img {
+    margin-top: 10px;
+    width: 75%;
+    height: 250px;
+    padding: 20px;
+}
+

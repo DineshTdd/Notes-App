@@ -1,0 +1,15 @@
+<div class="container">
+    <mat-card *ngFor='let note of notesList' class="scrollable-content">
+        <mat-card-header>
+        <mat-card-title><h6>{{ note.title }}</h6></mat-card-title>
+    </mat-card-header>
+        <mat-card-content style="padding:1em;">
+            <p>{{ note.note }}</p>
+            <img *ngIf='note.image' [src]= 'note.image' /> 
+        </mat-card-content>
+    </mat-card>
+</div>
+<div *ngIf="lenempty"><h1>Start creating notes!</h1></div>
+<div class="end">
+<a routerLinkActive="accent" mat-raised-button routerLink="**">Home</a>
+</div>

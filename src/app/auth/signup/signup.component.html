@@ -1,0 +1,39 @@
+<mat-card>
+<mat-card-title>Signup</mat-card-title>
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <mat-form-field>
+        <input matInput placeholder="First Name" type="text" formControlName="firstName"  [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+            <mat-error *ngIf="submitted && f.firstName.errors">First Name is required</mat-error>
+    </mat-form-field>
+    </div>
+    <div class="form-group">
+        <mat-form-field>
+        <input matInput placeholder="Last Name" type="text" formControlName="lastName"  [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+            <mat-error *ngIf="submitted && f.lastName.errors">Last Name is required</mat-error>
+    </mat-form-field>
+    </div>
+    <div class="form-group">
+        <mat-form-field>
+        <input matInput placeholder="Username" type="text" formControlName="username"  [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <mat-error *ngIf="submitted && f.username.errors">Username is required</mat-error>
+    </mat-form-field>
+    </div>
+    <div class="form-group">
+        <mat-form-field>
+        <input matInput placeholder="Password" type="password" formControlName="password"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <mat-error *ngIf="submitted && f.password.errors && f.password.errors.required">Password is required</mat-error>
+            <mat-error *ngIf="submitted && f.password.errors && f.password.errors.minlength">Password must be at least 6 characters</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="form-group">
+        <button color="accent" mat-raised-button [disabled]="loading" >
+            <mat-spinner [diameter]="25" *ngIf="loading"></mat-spinner>
+            Signup
+        </button>
+        <span>&nbsp;&nbsp;&nbsp;</span>
+        <a mat-raised-button color="warn" routerLink="/login" >Cancel</a>
+    </div>
+</form>
+</mat-card>

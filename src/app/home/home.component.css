@@ -1,0 +1,33 @@
+.container {
+    margin-top: 50px;
+    display:flex;
+    justify-content: space-around;
+    padding: auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+i {
+    margin-top: 35px;
+    cursor: pointer;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-around;
+}
+
+mat-card {
+    width: 200px;
+    height: 300px;
+    cursor: pointer;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0 2px 1px -1px rgb(37, 33, 33), 
+                0 1px 10px 0 rgb(255, 0, 0), 
+                0 1px 3px 0 rgba(0,0,0,1);
+}

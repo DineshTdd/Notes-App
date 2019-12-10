@@ -1,0 +1,55 @@
+.container {
+    display: inline-grid;
+    justify-content: space-between;
+    margin-top: 60px;
+    grid-template-columns: auto auto auto;
+    padding-bottom: 10px;
+}
+
+h6 {
+    color:white;
+    float: left;
+    font-weight: bold;
+}
+
+mat-card {
+    width: 350px;
+    height: auto;
+    cursor: default;
+    margin-top: 20px;
+    padding-top:0;padding-left:0;padding-right:0;
+}
+
+.mat-card.scrollable-content {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  
+  }
+
+mat-card-title {
+    padding-top: 3px;
+}
+
+p {
+    border-radius: 2px;
+    border-color: white;
+    text-align: justify;
+    padding: 3px;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0 2px 1px -1px rgb(37, 33, 33), 
+                0 1px 10px 0 rgb(0, 162, 255), 
+                0 1px 3px 0 rgba(0,0,0,1);
+}
+
+.end {
+    margin-top: 20px;
+}
+
+img {
+    width: 80%;
+    height: 250px;
+    padding: 25px;  
+}
