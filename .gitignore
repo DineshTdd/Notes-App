@@ -1,3 +1,6 @@
+*.pub
+*.pub.pub
+
 # Logs
 logs
 *.log
