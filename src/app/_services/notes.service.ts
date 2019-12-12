@@ -7,7 +7,14 @@ export class NotesService {
     constructor(private http: HttpClient) { }
 
     addNote(title: string, note: string, image?: string) {
-        console.log('entering backend');
         return this.http.post(`${this.apiUrl}/notes/create`, {title, note, image});
+    }
+
+    addToTodoList(todo: string) {
+        return this.http.post(`${this.apiUrl}/todo/`, {todo});
+    }
+
+    getTodoList() {
+        return this.http.get(`${this.apiUrl}/todo/`);
     }
 }

@@ -17,7 +17,7 @@ mat-card {
     height: auto;
     cursor: default;
     margin-top: 20px;
-    padding-top:0;padding-left:0;padding-right:0;
+    padding-top: 2rem;padding-left:0;padding-right:0;
 }
 
 .mat-card.scrollable-content {
@@ -27,15 +27,19 @@ mat-card {
   
   }
 
-mat-card-title {
-    padding-top: 3px;
+mat-card-header {
+    height: 25%;
+}
+
+
+mat-card-content {
+    height: 75%;
+    padding: 3px;
 }
 
 p {
-    border-radius: 2px;
-    border-color: white;
     text-align: justify;
-    padding: 3px;
+    
 }
 
 .mat-card:not([class*=mat-elevation-z]) {
@@ -46,6 +50,7 @@ p {
 
 .end {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 img {
@@ -53,3 +58,4 @@ img {
     height: 250px;
     padding: 25px;  
 }
+

@@ -5,15 +5,15 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 // array in local storage for registered users
 let users = JSON.parse(localStorage.getItem('users')) || [];
-let currentUserId = JSON.parse(localStorage.getItem('currentUser')).id || '';
+let currentUserId = '';
 let notesList = JSON.parse(localStorage.getItem('notesList')) || [];
+let todoList = JSON.parse(localStorage.getItem('todoList')) || [];
 localStorage.setItem('notesList', JSON.stringify(notesList));
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const { url, method, headers, body } = request;
-
         // wrap in delayed observable to simulate server api call
         return of(null)
             .pipe(mergeMap(handleRoute))
@@ -32,8 +32,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 case url.match(/\/users\/\d+$/) && method === 'DELETE':
                     return deleteUser();
                 case url.endsWith('/notes/create') && method === 'POST':
-                    console.log('backend')
                     return addNote();
+                case url.endsWith('/todo/'):
+                    if (method === 'POST') {
+                        return addTodo();
+                    } else if (method === 'GET') {
+                        return getTodo();
+                    }
+                    break;
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -89,36 +95,64 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function addNote() {
             const { title, note, image } = body;
+            currentUserId = JSON.parse(localStorage.getItem('currentUser')).id || '';
             if (!isLoggedIn() || currentUserId === '' ) {
                 return unauthorized();
             }
-            currentUserId = JSON.parse(localStorage.getItem('currentUser')).id || '';
-            console.log(title + ' ' + note + ' ' + currentUserId);
             const notes = {
                 id: 0,
                 title,
                 note,
                 image
             };
-            console.log(JSON.stringify(notes));
             if (!notesList.find(x => x.id === currentUserId)) {
-                console.log('new addition');
                 const notesUser = {
                     id: currentUserId,
                     userNotes: []
                 };
                 notesList.push(notesUser);
                 if (notesList.length > 0) {
-                    notesList.sort((a, b) => (a.id > b.id) ? 1 : -1);
+                    notesList.sort((a: { id: number; }, b: { id: number; }) => (a.id > b.id) ? 1 : -1);
                 }
-                console.log(JSON.stringify(notesList));
             }
             const index = notesList.findIndex(x => x.id === currentUserId);
             const userNotesLen = notesList[index].userNotes.length;
             notes.id =  userNotesLen > 0 ?  userNotesLen : 0;
             notesList[index].userNotes.push(JSON.stringify(notes));
-            console.log(JSON.stringify(notesList));
             localStorage.setItem('notesList', JSON.stringify(notesList));
+
+            return ok(body);
+        }
+
+        function getTodo() {
+            currentUserId = JSON.parse(localStorage.getItem('currentUser')).id || '';
+            if (!isLoggedIn() || currentUserId === '' ) {
+                return unauthorized();
+            }
+            todoList = JSON.parse(localStorage.getItem('todoList'));
+            const index = todoList.findIndex(x => x.id === currentUserId);
+            return ok(todoList[index].userTodos);
+        }
+
+        function addTodo() {
+            const { todo } = body;
+            currentUserId = JSON.parse(localStorage.getItem('currentUser')).id || '';
+            if (!isLoggedIn() || currentUserId === '' ) {
+                return unauthorized();
+            }
+            if (!todoList.find(x => x.id === currentUserId)) {
+                const todoUser = {
+                    id: currentUserId,
+                    userTodos: []
+                };
+                todoList.push(todoUser);
+                if (todoList.length > 0) {
+                    todoList.sort((a: { id: number; }, b: { id: number; }) => (a.id > b.id) ? 1 : -1);
+                }
+            }
+            const index = todoList.findIndex(x => x.id === currentUserId);
+            todoList[index].userTodos.push(todo);
+            localStorage.setItem('todoList', JSON.stringify(todoList));
 
             return ok(body);
         }

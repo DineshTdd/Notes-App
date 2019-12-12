@@ -9,10 +9,10 @@ import { NotesService } from '../_services/notes.service';
 @Component({ templateUrl: 'notes.component.html', styleUrls: ['notes.component.css'] })
 export class NotesComponent implements OnInit {
     noteForm: FormGroup;
-    loading = false;
-    submitted = false;
+    isLoading = false;
+    isSubmitted = false;
     image: any;
-    invalidImage = false;
+    isInvalidImage = false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -31,7 +31,7 @@ export class NotesComponent implements OnInit {
     get f() { return this.noteForm.controls; }
 
     getImage(event) {
-        this.invalidImage = false;
+        this.isInvalidImage = false;
         const reader = new FileReader();
         localStorage.setItem('imgData', null);
         if (event.target.files && event.target.files.length) {
@@ -42,7 +42,7 @@ export class NotesComponent implements OnInit {
             if (img.match(/^data:image\/(png|jpg|jpeg|gif);base64,/)) {
                 this.image = img;
             } else {
-                this.invalidImage = true;
+                this.isInvalidImage = true;
                 return;
             }
         };
@@ -58,7 +58,7 @@ export class NotesComponent implements OnInit {
     }
 
     onSubmit() {
-        this.submitted = true;
+        this.isSubmitted = true;
 
 
         // stop here if form is invalid
@@ -66,7 +66,7 @@ export class NotesComponent implements OnInit {
             return;
         }
 
-        this.loading = true;
+        this.isLoading = true;
         this.notesService.addNote(this.f.title.value, this.f.note.value, this.image)
             .pipe(first())
             .subscribe(
@@ -76,7 +76,7 @@ export class NotesComponent implements OnInit {
                     this.router.navigate(['**']);
                 },
                 error => {
-                    this.loading = false;
+                    this.isLoading = false;
                 });
     }
 

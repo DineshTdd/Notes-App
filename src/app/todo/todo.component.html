@@ -1,0 +1,21 @@
+<div class="container">
+    <mat-card>
+        <form [formGroup]="todoForm">
+        <div class="input-container">
+            <mat-form-field class="text-input-container">
+            <input [ngClass]="{ 'is-invalid': f.todo.errors }" formControlName="todo" #todo class="text-input" required  matInput type="text" placeholder="Your todo" /> 
+            <mat-error *ngIf="f.todo.errors">Todo is required!</mat-error>
+        </mat-form-field>
+        <button (click)="addTodo(todo.value)" class="button-container" mat-raised-button type="button" ><i class="material-icons">add_circle_outline</i></button>
+        </div>
+        </form>
+        <mat-card-content>
+            <div *ngFor="let todo of todoList">
+                <h1>{{todo}}</h1>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div class="end">
+    <a style="text-decoration:none;" color="accent" TITLE="Go to homepage" mat-raised-button routerLink="**">Home</a>
+</div>

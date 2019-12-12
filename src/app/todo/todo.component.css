@@ -1,0 +1,41 @@
+.container {
+    margin-top: 3.5rem;
+    height: auto;
+    width: 50%;
+    overflow: hidden;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-container .text-input-container {
+    width: 80%;
+    
+}
+
+.input-container .text-input-container .text-input {
+    width: 100%;
+}
+
+.input-container .button-container {
+    float: right;
+    width: auto;
+    height: auto;
+}
+
+i {
+    cursor: pointer;
+}
+
+span {
+    text-align: left;
+}
+
+.end {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

@@ -20,6 +20,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AlertComponent } from './_components/_alert/alert.component';
 import { NotesComponent } from './notes/notes.component';
 import { NoteViewComponent } from './view/noteview.component';
+import { TodoComponent } from './todo/todo.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { NoteViewComponent } from './view/noteview.component';
     SignupComponent,
     AlertComponent,
     NotesComponent,
-    NoteViewComponent
+    NoteViewComponent,
+    TodoComponent
   ],
   imports: [
     BrowserModule,
